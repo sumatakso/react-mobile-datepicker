@@ -1100,18 +1100,14 @@ var DatePicker = function (_Component) {
                 dateConfig = _props3.dateConfig,
                 confirmText = _props3.confirmText,
                 cancelText = _props3.cancelText,
-                headerFormat = _props3.headerFormat,
                 showHeader = _props3.showHeader,
                 showFooter = _props3.showFooter,
-                customHeader = _props3.customHeader,
                 showCaption = _props3.showCaption;
 
             var value = this.state.value;
             var themeClassName = ['default', 'dark', 'ios', 'android', 'android-dark'].indexOf(theme) === -1 ? 'default' : theme;
 
             var dataConfigList = this.normalizeDateConfig(dateConfig);
-            console.log('dateConfig: ', dateConfig);
-            console.log('dataConfigList: ', dataConfigList);
             return React__default.createElement(
                 'div',
                 {
@@ -1119,7 +1115,7 @@ var DatePicker = function (_Component) {
                 showHeader && React__default.createElement(
                     'div',
                     { className: 'datepicker-header' },
-                    customHeader || convertDate(value, headerFormat)
+                    this.renderHeader(value)
                 ),
                 showCaption && React__default.createElement(
                     'div',
