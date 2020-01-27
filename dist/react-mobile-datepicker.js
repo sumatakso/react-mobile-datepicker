@@ -1055,7 +1055,21 @@ var DatePicker = function (_Component) {
 
             return configList;
         }
+    }, {
+        key: 'renderHeader',
+        value: function renderHeader(value) {
+            var _props2 = this.props,
+                headerFormat = _props2.headerFormat,
+                customHeader = _props2.customHeader;
 
+            if (customHeader) {
+                if (typeof customHeader === "function") {
+                    return customHeader(value);
+                }
+                return customHeader;
+            }
+            return convertDate(value, headerFormat);
+        }
         /**
          * render函数
          * @return {Object} JSX对象
@@ -1066,18 +1080,18 @@ var DatePicker = function (_Component) {
         value: function render() {
             var _this3 = this;
 
-            var _props2 = this.props,
-                min = _props2.min,
-                max = _props2.max,
-                theme = _props2.theme,
-                dateConfig = _props2.dateConfig,
-                confirmText = _props2.confirmText,
-                cancelText = _props2.cancelText,
-                headerFormat = _props2.headerFormat,
-                showHeader = _props2.showHeader,
-                showFooter = _props2.showFooter,
-                customHeader = _props2.customHeader,
-                showCaption = _props2.showCaption;
+            var _props3 = this.props,
+                min = _props3.min,
+                max = _props3.max,
+                theme = _props3.theme,
+                dateConfig = _props3.dateConfig,
+                confirmText = _props3.confirmText,
+                cancelText = _props3.cancelText,
+                headerFormat = _props3.headerFormat,
+                showHeader = _props3.showHeader,
+                showFooter = _props3.showFooter,
+                customHeader = _props3.customHeader,
+                showCaption = _props3.showCaption;
 
             var value = this.state.value;
             var themeClassName = ['default', 'dark', 'ios', 'android', 'android-dark'].indexOf(theme) === -1 ? 'default' : theme;
