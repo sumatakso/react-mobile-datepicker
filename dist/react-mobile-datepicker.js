@@ -1041,13 +1041,26 @@ var DatePicker = function (_Component) {
                     }
                 }
             } else {
-                for (var key in dataConfig) {
-                    if (dataConfig.hasOwnProperty(key)) {
-                        var _lowerCaseKey = key.toLocaleLowerCase();
-                        if (dateConfigMap.hasOwnProperty(_lowerCaseKey)) {
-                            configList.push(_extends({}, dateConfigMap[_lowerCaseKey], dataConfig[key], {
-                                type: capitalize(_lowerCaseKey)
+                var renderOrder = this.props.renderOrder;
+
+                if (renderOrder && Array.isArray(renderOrder)) {
+                    renderOrder.forEach(function (key) {
+                        var lowerCaseKey = key.toLocaleLowerCase();
+                        if (dateConfigMap.hasOwnProperty(lowerCaseKey)) {
+                            configList.push(_extends({}, dateConfigMap[lowerCaseKey], dataConfig[key], {
+                                type: capitalize(lowerCaseKey)
                             }));
+                        }
+                    });
+                } else {
+                    for (var key in dataConfig) {
+                        if (dataConfig.hasOwnProperty(key)) {
+                            var _lowerCaseKey = key.toLocaleLowerCase();
+                            if (dateConfigMap.hasOwnProperty(_lowerCaseKey)) {
+                                configList.push(_extends({}, dateConfigMap[_lowerCaseKey], dataConfig[key], {
+                                    type: capitalize(_lowerCaseKey)
+                                }));
+                            }
                         }
                     }
                 }
@@ -1097,7 +1110,8 @@ var DatePicker = function (_Component) {
             var themeClassName = ['default', 'dark', 'ios', 'android', 'android-dark'].indexOf(theme) === -1 ? 'default' : theme;
 
             var dataConfigList = this.normalizeDateConfig(dateConfig);
-
+            console.log('dateConfig: ', dateConfig);
+            console.log('dataConfigList: ', dataConfigList);
             return React__default.createElement(
                 'div',
                 {
